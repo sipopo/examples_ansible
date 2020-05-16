@@ -4,7 +4,7 @@ mysql:
     user_level_priv:
      - all
      - grant
-  someuser@localhost:
+  some_user@localhost:
     password: 'someuser_password'
     db_level_priv:
       dbinfo:
@@ -12,7 +12,7 @@ mysql:
        - insert
        - update
        - delete
-  anotheruser@localhost:
+  another_user@localhost:
     password: 'another_password'
     db_level_priv:
       dbinfo:
