@@ -13,7 +13,7 @@
                 password: 3
 
   vars_files:
-    - /usr/local/etc/ansible/keys/gsi/mysql.pwd.test.v2
+    - mysql.pwd.test.v2
   tasks:
      - name: print type of var
        debug:

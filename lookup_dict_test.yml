@@ -1,6 +1,6 @@
 - hosts: localhost
   vars_files:
-    - /usr/local/etc/ansible/keys/gsi/mysql.pwd.test.v2
+    - mysql.pwd.test.v2
   tasks:
      - name: print vars
        debug:
@@ -17,4 +17,4 @@
        debug: 
          msg: "show {{ mysql.{{item}}.password }}"
        loop:
-         - gsi
+         - some_user
