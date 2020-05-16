@@ -1,0 +1,20 @@
+- hosts: localhost
+  vars_files:
+    - /usr/local/etc/ansible/keys/gsi/mysql.pwd.test.v2
+  tasks:
+     - name: print vars
+       debug:
+         msg: "{{ mysql }}"
+
+     - name:  dict lookup
+       debug:
+         msg: "{{ item.key }} -- {{ item.value.password }} "
+       loop: "{{ lookup('dict', mysql ) }}"
+ 
+       when: "'root@localhost' not in item.key"
+
+     - name: debug
+       debug: 
+         msg: "show {{ mysql.{{item}}.password }}"
+       loop:
+         - gsi

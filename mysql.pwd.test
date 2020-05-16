@@ -1,0 +1,19 @@
+mysql:
+  root@localhost:
+    password: 'root_password'
+    user_level_priv:
+     - all
+     - grant
+  someuser@localhost:
+    password: 'someuser_password'
+    db_level_priv:
+      dbinfo:
+       - select
+       - insert
+       - update
+       - delete
+  anotheruser@localhost:
+    password: 'another_password'
+    db_level_priv:
+      dbinfo:
+       - all

@@ -1,0 +1,9 @@
+mysql:
+  root@localhost:
+    password: 'root_password'
+  some_user:
+    password: 'some_password'
+    priv: 'dbinfo.*:SELECT,INSERT,UPDATE,DELETE'
+  another_user:
+    password: 'another_password'
+    priv: 'dbinfo.*:ALL'

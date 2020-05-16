@@ -1,0 +1,32 @@
+- hosts: localhost
+  vars:
+    mysql_info: 
+       users: 
+         localhost: 
+             root: 
+                Alter_priv: Y
+                Alter_routine_priv: Y
+             olya: 
+                password: 2
+         freebsd.com: 
+             root: 
+                password: 3
+
+  vars_files:
+    - /usr/local/etc/ansible/keys/gsi/mysql.pwd.test.v2
+  tasks:
+     - name: print type of var
+       debug:
+         msg: "{{ mysql_info | type_debug }}"
+     
+     - name: print
+       debug:
+         msg: "{{ item.key }}  {{ item.value|dict2items|json_query('[].key') }}"
+       loop: "{{ lookup('dict', mysql_info.users) }}"
+
+     - name: run block loop
+       include_tasks: block_loop.yml
+       loop: "{{ mysql_info.users | dict2items  }}"
+       loop_control:
+         loop_var: mysql_users
+

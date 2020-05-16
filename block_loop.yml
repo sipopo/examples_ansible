@@ -1,0 +1,16 @@
+- name: set varables
+  set_fact:
+     hostname: "{{ [mysql_users.key] }}"
+     username: "{{ mysql_users.value|dict2items|json_query('[].key') }}"
+
+- name: print variable
+  debug:
+    msg: "{{ hostname }}  -- {{ username }}"
+
+- name: with_nested -> loop
+  debug:
+    msg: |
+         "hostname {{ item.0 }} - user {{ item.1 }}"| 
+         "{{ item.1 }}@{{ item.0 }}"
+  when: "not ('root' in item.1 and 'localhost' in item.0)"
+  loop: "{{ hostname|product(username)|list }}"
