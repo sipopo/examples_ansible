@@ -1,9 +1,9 @@
 mysql:
   root@localhost:
     password: 'root_password'
-  some_user:
+  some_user@localhost:
     password: 'some_password'
     priv: 'dbinfo.*:SELECT,INSERT,UPDATE,DELETE'
-  another_user:
+  another_user@localhost:
     password: 'another_password'
     priv: 'dbinfo.*:ALL'

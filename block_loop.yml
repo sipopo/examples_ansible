@@ -5,12 +5,22 @@
 
 - name: print variable
   debug:
-    msg: "{{ hostname }}  -- {{ username }}"
+    msg: "{{ hostname }}  -- {{ username }}  -- {{ local_mysql_users }}"
 
-- name: with_nested -> loop
+
+# - name: extract username and host from mysql
+#   debug: 
+#     msg: " name: {{ item.key|regex_replace('@.*$') }} - host: {{ item.key|regex_replace('^.*@') }}"
+# 
+#   loop: "{{ mysql|dict2items }}"
+
+
+- name: netsted loop - generate user and host
   debug:
     msg: |
          "hostname {{ item.0 }} - user {{ item.1 }}"| 
          "{{ item.1 }}@{{ item.0 }}"
-  when: "not ('root' in item.1 and 'localhost' in item.0)"
+  # check that user (host part and username part) doesn't exist in local_mysql_users list       
+  when: " not ( item.1 in local_mysql_users|join(' ') and item.0 in local_mysql_users|join(' ') )"
   loop: "{{ hostname|product(username)|list }}"
+  

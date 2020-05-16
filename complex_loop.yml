@@ -24,6 +24,10 @@
          msg: "{{ item.key }}  {{ item.value|dict2items|json_query('[].key') }}"
        loop: "{{ lookup('dict', mysql_info.users) }}"
 
+     - name: set local variables
+       set_fact:     
+          local_mysql_users: "{{ mysql|dict2items|json_query('[].key') }}"
+
      - name: run block loop
        include_tasks: block_loop.yml
        loop: "{{ mysql_info.users | dict2items  }}"
